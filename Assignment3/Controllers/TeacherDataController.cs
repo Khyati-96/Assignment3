@@ -122,6 +122,11 @@ namespace Assignment3.Controllers
             return NewTeacher;
         }
 
+        internal void UpdateTeacher(int id, Teacher teachrInfo)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -179,5 +184,31 @@ namespace Assignment3.Controllers
             Conn.Close();
 
         }
+
+        public void Update(int id, [FromBody] Teacher newteacher)
+        {
+            MySqlConnection conn = School.AccessDatabase();
+
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand();
+
+            /*Console.WriteLine(newteacher);*/
+            System.Diagnostics.Debug.WriteLine(newteacher.Teacherfname);
+
+            cmd.CommandText = "UPDATE teachers set teacherfname=@teacherfname,teacherlname=@teacherlname," +
+                "employeenumber=@employeenumber,salary=@salary  where teacherid = @teacherID";
+
+            cmd.Parameters.AddWithValue("@teacherfname", newteacher.Teacherfname);
+            cmd.Parameters.AddWithValue("@teacherlname", newteacher.Teacherlname);
+            cmd.Parameters.AddWithValue("@employeenumber", newteacher.Employeenumber);
+            _ = cmd.Parameters.AddWithValue("@hiredate", newteacher.Hiredate);
+            cmd.Parameters.AddWithValue("@salary", newteacher.Salary);
+            cmd.Parameters.AddWithValue("@teacherID", id);
+
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
     }
-}
+ }

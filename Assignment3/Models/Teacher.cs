@@ -14,5 +14,7 @@ namespace Assignment3.Models
         public string Employeenumber;
         public DateTime Hiredate;
         public decimal Salary;
+
+        public object DateTime { get; internal set; }
     }
 }

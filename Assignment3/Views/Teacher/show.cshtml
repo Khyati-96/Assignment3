@@ -1,14 +1,24 @@
-﻿@model Assignment3.Models.Teacher
-@{
-    ViewBag.Title = "Show";
+﻿@{
+    ViewBag.Title = "show";
 }
 
-<div id="containershow">
-    <nav>
-        <a class="navlink" href="/Teacher/List">Back To Teachers</a>
-    </nav>
+<h2>Teacher Details</h2>
+<nav>
+    <a href="/Teacher/list">Go back to List</a>
 
-    <h1>@Model.Teacherfname @Model.Teacherlname</h1>
+</nav>
+<nav class="navlink">
+    <a href="/Teacher/update/@Model.TeacherId">Update this record</a>
+</nav>
 
-    <p><strong>Salary:</strong> $@Model.Salary </p>
+<div>
+    <h3> Employee Name : @Model.Teacherfname       @Model.Teacherlname      </h3> <br />
+    <h3>Emplyee no:  @Model.Employeenumber</h3><br />
+    <h3>Hire date: @Model.Hiredate</h3> <br />
+    <h3>Salary:@Model.Salary <
+</div>/h3><br />
+
+
+<div>
+    <a href="/Teacher/delete_confirm/@Model.TeacherId"><p>Delete this record</p></a>
 </div>

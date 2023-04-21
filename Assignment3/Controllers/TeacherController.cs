@@ -96,5 +96,51 @@ namespace Assignment3.Controllers
 
             return RedirectToAction("List");
         }
+
+
+        //POST : Teacher/Update/{id}
+        /// <summary>
+        /// Receives a POST request containting information about an existing teacher in the system, with new values.
+        /// Convesy this information to the API, and redirects to the "Teacher Show" page of our updated teacher.
+        /// </summary>
+        /// <param name="id">id of teacher to update</param>
+        /// <param name="Teacherfname">updated first name of teacher</param>
+        /// <param name="TeacherLlname">updated last name of teacher</param>
+        /// <param name="Employeenumber">updated bio of teacher</param>
+        /// <param name="Hiredate">updated email of teacher</param>
+        /// <param name="Salary">updated salary of teacher</param>
+        /// <returns>
+        /// dynamic webpage which provides current info of teacher
+        /// </returns>
+        [HttpPost]
+        public ActionResult Update(int id, string TeacherFname, string TeacherLname, string EmployeeNum, DateTime HireDate, decimal Salary)
+        {
+            //debug
+            Debug.WriteLine("Input received from 'Add Teacher' form!");
+            Debug.WriteLine(TeacherFname);
+            Debug.WriteLine(TeacherLname);
+            Debug.WriteLine(EmployeeNum);
+            Debug.WriteLine(HireDate);
+            Debug.WriteLine(Salary);
+
+            //instantiate new teacher and assign values to object properties
+            Teacher TeachrInfo = new Teacher();
+
+            TeachrInfo.Teacherfname = TeacherFname;
+            TeachrInfo.Teacherlname = TeacherLname;
+            TeachrInfo.Employeenumber = EmployeeNum;
+            TeachrInfo.Hiredate = HireDate;
+            TeachrInfo.Salary = Salary;
+
+            //pass new data to AddTeacher method in TeacherDataController
+            TeacherDataController controller = new TeacherDataController();
+            controller.UpdateTeacher(id, TeachrInfo);
+
+            //redirect to show/id
+            return RedirectToAction("Show/" + id);
+        }
+
     }
-}
+ }
+
+
